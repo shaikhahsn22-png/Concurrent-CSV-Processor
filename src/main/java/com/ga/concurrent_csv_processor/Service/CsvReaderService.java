@@ -5,6 +5,7 @@ import org.springframework.stereotype.Service;
 
 import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.math.BigDecimal;
 import java.time.LocalDate;
@@ -19,10 +20,17 @@ public class CsvReaderService {
         //list of employees
         ArrayList<Employee> employees = new ArrayList<>();
 
-        try (BufferedReader reader = new BufferedReader(
-                //InputStreamReader: convert bytes into text char, getResourceAsStream: find and open the file as bytes
-                //search for the resource and opens a stream to read file content
-                new InputStreamReader(getClass().getResourceAsStream("/test_employees.csv")))){
+        //open the csv file
+        InputStream inputStream = getClass().getResourceAsStream("/test_employees.csv"); //getResourceAsStream: find and open the file as bytes
+
+        //check if file is null
+        if(inputStream == null){
+            System.out.println("File is not found");
+            return employees;
+        }
+
+        //InputStreamReader: convert bytes into text char
+        try (BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream))){
 
             //read csv file one line at a time
             String line;
@@ -42,8 +50,6 @@ public class CsvReaderService {
                 //add employee to the list
                 employees.add(employee);
             }
-
-
 
         }catch (IOException e) {
             e.printStackTrace();
