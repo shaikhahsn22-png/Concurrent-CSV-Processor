@@ -163,11 +163,3 @@ For the Semaphore test, I temporarily added a one-second delay to observe how th
 All employee tasks completed successfully
 Total employees processed: 30
 ```
-
-## Challenges and What I Learned
-
-One challenge was understanding how multiple threads can access shared data safely. I used ReentrantLock to protect the results list and Semaphore to control how many threads could process employees at the same time.
-
-Another issue was that some salary results showed extra decimal digits. I fixed this by rounding the final salary to three decimal places.
-
-Through this project, I learned how to read CSV files, work with employee objects, calculate salary increases, use thread pooling, and manage shared resources using Java concurrency techniques.
