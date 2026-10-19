@@ -46,4 +46,16 @@ public class Employee {
     public double getProjectCompletion() {
         return projectCompletion;
     }
+
+    @Override
+    public String toString() {
+        return "Employee{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", salary=" + salary +
+                ", joinDate=" + joinDate +
+                ", role='" + role + '\'' +
+                ", projectCompletion=" + projectCompletion +
+                '}';
+    }
 }
