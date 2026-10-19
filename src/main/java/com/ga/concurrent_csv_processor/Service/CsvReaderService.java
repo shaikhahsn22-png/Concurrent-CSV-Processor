@@ -37,6 +37,12 @@ public class CsvReaderService {
             while ((line = reader.readLine()) != null){
                 //convert each row into employee object
                 String[] value = line.split(",");
+
+                //check num of column
+                if(value.length != 6){
+                    System.out.println("Row is invalid");
+                    continue;
+                }
                 int id = Integer.parseInt(value[0]);
                 String name = value[1];
                 BigDecimal salary = new BigDecimal(value[2]);
