@@ -4,6 +4,7 @@ import com.ga.concurrent_csv_processor.Model.Employee;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
 
@@ -38,6 +39,7 @@ public class SalaryCalculator {
         //calculate the final salary
         double totalIncrease = (roleIncrease + yearIncrease) / 100;
         BigDecimal newSalary = employee.getSalary().multiply(BigDecimal.valueOf(1 + totalIncrease));
+        newSalary = newSalary.setScale(3, RoundingMode.HALF_UP); //to keep three digits after the decimal point
 
         //return new salary
         return newSalary;
