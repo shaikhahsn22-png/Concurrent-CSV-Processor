@@ -1,0 +1,33 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Concurrent CSV Data Processor</title>
+  <link rel="stylesheet" href="/style.css">
+  <script src="/script.js" defer></script>
+</head>
+<body>
+  <div class="topbar"><div class="brand"><span class="brand-icon" aria-hidden="true">≋</span> Workforce <span class="brand-detail">/ Salary operations</span></div><span class="environment"><span></span> Java multithreading</span></div>
+  <main>
+    <header class="page-header">
+      <div><p class="eyebrow">EMPLOYEE OPERATIONS</p><h1>Concurrent CSV Data Processor</h1><p class="description">Process employee salary updates using Java multithreading.</p></div>
+      <button id="process-button" type="button"><span id="button-icon" aria-hidden="true">↻</span> <span id="button-label">Process Employees</span></button>
+    </header>
+    <section class="summary" aria-label="Processing summary">
+      <article class="card"><div class="card-top"><h2>Total Employees</h2><span class="card-icon" aria-hidden="true">◎</span></div><p class="metric" id="total">—</p><p>Records processed from your CSV</p></article>
+      <article class="card"><div class="card-top"><h2>Employees with Increases</h2><span class="card-icon green" aria-hidden="true">↗</span></div><p class="metric" id="increased">—</p><p>Employees receiving a salary increase</p></article>
+      <article class="card"><div class="card-top"><h2>Bonus Eligible</h2><span class="card-icon purple" aria-hidden="true">✧</span></div><p class="metric" id="bonus">—</p><p>Above 80% completion · 1.5× increase</p></article>
+    </section>
+    <div id="error" class="error" role="alert" hidden></div>
+    <section class="results" aria-labelledby="results-title" aria-busy="false">
+      <div class="table-toolbar"><div><h2 id="results-title">Employee results <span id="result-count" class="count">0</span></h2><p>Review salary updates and project performance.</p></div><div class="search"><label for="search">Search employees by name</label><input id="search" type="search" placeholder="Search by employee name…" disabled></div></div>
+      <p id="processing-status" class="processing-status" role="status" aria-live="polite">Ready when you are. Start a processing run to see your results.</p>
+      <div class="table-scroll"><table><thead><tr><th scope="col">Employee ID</th><th scope="col">Employee Name</th><th scope="col">Role</th><th scope="col" class="numeric">Original Salary</th><th scope="col" class="numeric">New Salary</th><th scope="col" class="numeric">Increase (%)</th><th scope="col">Project Completion</th><th scope="col">Status</th></tr></thead><tbody id="employee-rows"></tbody></table></div>
+      <div id="empty-state" class="empty-state"><span class="empty-icon" aria-hidden="true">▤</span><h3>No employees processed yet</h3><p>Click Process Employees to calculate salary updates<br>and bring your employee data into view.</p></div>
+      <div class="table-footer"><span id="visible-count">No records to display</span><span>Source: test_employees.csv</span></div>
+    </section>
+    <footer class="page-footer"><span>Concurrent CSV Data Processor</span><span>5 worker threads <span aria-hidden="true">·</span> 3 concurrent tasks</span></footer>
+  </main>
+</body>
+</html>

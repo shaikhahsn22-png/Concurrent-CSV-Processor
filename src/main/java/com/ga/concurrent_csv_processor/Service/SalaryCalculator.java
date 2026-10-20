@@ -37,7 +37,17 @@ public class SalaryCalculator {
         double yearIncrease = yearsCompleted * 2;
 
         //calculate the final salary
-        double totalIncrease = (roleIncrease + yearIncrease) / 100;
+        double totalIncrease = (roleIncrease + yearIncrease);
+
+        //check project completion, if more than 80% then multiply by 1.5
+        if(employee.getProjectCompletion() > 0.8){
+            totalIncrease = totalIncrease * 1.5;
+        }
+
+        //convert total increase into decimal
+        totalIncrease = totalIncrease/100;
+
+
         BigDecimal newSalary = employee.getSalary().multiply(BigDecimal.valueOf(1 + totalIncrease));
         newSalary = newSalary.setScale(3, RoundingMode.HALF_UP); //to keep three digits after the decimal point
 

@@ -25,8 +25,7 @@ public class CsvReaderService {
 
         //check if file is null
         if(inputStream == null){
-            System.out.println("File is not found");
-            return employees;
+            throw new IllegalStateException("Employee CSV file was not found.");
         }
 
         //InputStreamReader: convert bytes into text char
@@ -40,8 +39,7 @@ public class CsvReaderService {
 
                 //check num of column
                 if(value.length != 6){
-                    System.out.println("Row is invalid");
-                    continue;
+                    throw new IllegalStateException("Employee CSV contains a row without six columns.");
                 }
                 int id = Integer.parseInt(value[0]);
                 String name = value[1];
@@ -58,7 +56,9 @@ public class CsvReaderService {
             }
 
         }catch (IOException e) {
-            e.printStackTrace();
+            throw new IllegalStateException("Could not read the employee CSV file.", e);
+        } catch (IllegalArgumentException | java.time.format.DateTimeParseException e) {
+            throw new IllegalStateException("Employee CSV contains an invalid number or joining date.", e);
         }
 
 
