@@ -204,10 +204,6 @@ I implemented an additional bonus for employees whose project completion is abov
 
 Their total salary increase is multiplied by 1.5.
 
-For example, if the normal salary increase is 10%, the bonus increases it to 15%.
-
-Employees with exactly 80% project completion receive only the normal increase.
-
 ### 2. Interactive Frontend
 
 I created a dashboard that allows users to process employee data by clicking a button instead of only viewing results in the console.
