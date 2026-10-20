@@ -116,9 +116,9 @@ The project completion value is stored as a decimal, where `0.8` means 80%.
 4. Make sure `test_employees.csv` is inside `src/main/resources`.
 5. Let Maven download the required dependencies.
 6. Run `ConcurrentCsvProcessorApplication.java`.
-7. Check the console to see the original and updated salaries.
-
-The application is configured to run on port 8081.
+7. Open your browser and go to http://localhost:8081/.
+8. Click the Process Employees button to start processing the CSV data.
+9. View the employee salary results, summary cards, and salary increases on the dashboard.
 
 ## How Concurrency Works
 
@@ -137,6 +137,12 @@ ReentrantLock protects the shared results list. Only one thread can add a result
 Semaphore limits the number of employees being processed at the same time to three, even though the thread pool contains five workers.
 
 After processing, each worker releases its semaphore permit so another worker can continue.
+
+**4. AtomicInteger**
+
+AtomicInteger is used to count successfully processed employees. The incrementAndGet() method increases the counter safely when multiple threads are running at the same time.
+
+The counter starts at zero for each processing request.
 
 ## Testing and Results
 
@@ -163,3 +169,47 @@ For the Semaphore test, I temporarily added a one-second delay to observe how th
 All employee tasks completed successfully
 Total employees processed: 30
 ```
+
+## Frontend Dashboard
+
+I added a simple frontend using HTML, CSS, and JavaScript to make the application easier to use.
+
+The dashboard includes:
+- A Process Employees button to start salary calculations.
+- Summary cards showing total employees, employees receiving increases, and bonus-eligible employees.
+- A results table displaying employee details, original salary, new salary, increase percentage, project completion, and status.
+- A search field to find employees by name.
+- Loading and error messages.
+
+The frontend displays the results returned by the Spring Boot backend.
+
+## REST API
+
+I used a REST controller to connect the frontend to the backend.
+
+**Endpoint:** `POST /api/employees/process`
+
+When the user clicks Process Employees, JavaScript sends a request to this endpoint.
+
+The controller calls the existing employee processing service and returns the results as JSON.
+
+The frontend then displays the employee information in the dashboard.
+
+
+## Bonus Features
+
+### 1. Salary Increase Multiplier
+
+I implemented an additional bonus for employees whose project completion is above 80%.
+
+Their total salary increase is multiplied by 1.5.
+
+For example, if the normal salary increase is 10%, the bonus increases it to 15%.
+
+Employees with exactly 80% project completion receive only the normal increase.
+
+### 2. Interactive Frontend
+
+I created a dashboard that allows users to process employee data by clicking a button instead of only viewing results in the console.
+
+The dashboard also allows users to search employee records and review salary increases.
